@@ -4,280 +4,154 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VitrA - Karo Kategorisi Trafik Analizi</title>
-<meta name="description" content="VitrA ülke siteleri karo kategorisi kaldırma trafik etki analizi">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect fill='%23E8490F' width='32' height='32' rx='6'/><text x='50%25' y='55%25' dominant-baseline='central' text-anchor='middle' fill='white' font-size='18' font-weight='bold' font-family='Arial'>V</text></svg>">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
-:root{--vo:#E8490F;--vo-l:#FFF3EE;--vo-m:#FDDCCF;--vd:#1A1A1A;--g6:#6B6B6B;--g4:#9E9E9E;--g2:#E5E5E5;--g1:#F5F5F5;--w:#FFF;--radius:10px}
+:root{--vo:#E8490F;--vo-l:#FFF3EE;--vd:#1A1A1A;--g6:#6B6B6B;--g4:#9E9E9E;--g2:#E5E5E5;--g1:#F5F5F5;--w:#FFF;--r:10px}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:Calibri,Arial,Helvetica,sans-serif;background:var(--g1);color:var(--vd);line-height:1.6;min-height:100vh}
-
-/* HEADER */
-header{background:var(--vd);color:var(--w);padding:clamp(24px,5vw,48px) 0 clamp(20px,4vw,40px);position:relative;overflow:hidden}
-header::before{content:'';position:absolute;top:-50%;right:-10%;width:50%;height:200%;background:var(--vo);opacity:.06;transform:rotate(15deg);border-radius:40%}
 .container{max-width:960px;margin:0 auto;padding:0 clamp(16px,4vw,32px)}
+header{background:var(--vd);color:var(--w);padding:clamp(28px,5vw,48px) 0 clamp(24px,4vw,40px);position:relative;overflow:hidden}
+header::before{content:'';position:absolute;top:-50%;right:-10%;width:50%;height:200%;background:var(--vo);opacity:.06;transform:rotate(15deg);border-radius:40%}
 header .logo{font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--vo);margin-bottom:12px}
-header h1{font-size:clamp(18px,4vw,26px);font-weight:700;line-height:1.3}
+header h1{font-size:clamp(20px,4.5vw,26px);font-weight:700;line-height:1.3}
 .meta-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .meta-pills span{font-size:12px;color:rgba(255,255,255,.5);background:rgba(255,255,255,.07);padding:4px 12px;border-radius:20px}
-
-/* SUMMARY CARDS */
-.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,2vw,16px);margin:clamp(20px,4vw,32px) 0 clamp(12px,2vw,16px)}
-.s-card{background:var(--w);border:1px solid var(--g2);border-radius:var(--radius);padding:clamp(14px,3vw,22px) clamp(12px,3vw,24px);transition:box-shadow .2s}
+.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,2vw,16px);margin:clamp(24px,4vw,36px) 0 clamp(14px,2vw,18px)}
+.s-card{background:var(--w);border:1px solid var(--g2);border-radius:var(--r);padding:clamp(16px,3vw,24px);transition:box-shadow .2s}
 .s-card:hover{box-shadow:0 2px 12px rgba(0,0,0,.06)}
-.s-title{font-size:clamp(10px,1.4vw,11px);text-transform:uppercase;letter-spacing:1px;color:var(--g4);font-weight:700;margin-bottom:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.s-row{display:flex;justify-content:space-between;align-items:baseline;padding:3px 0}
-.s-label{font-size:clamp(11px,1.6vw,13px);color:var(--g6)}
-.s-val{font-family:Arial,sans-serif;font-size:clamp(14px,2vw,16px);font-weight:700}
-.s-divider{border-top:1px solid var(--g2);margin:6px 0}
-.s-pct{display:flex;justify-content:center;align-items:center;margin:8px 0;padding:5px 0;background:var(--vo-l);border-radius:6px;font-size:clamp(13px,2vw,15px);font-weight:700;color:var(--vo)}
-.s-sub{font-size:11px;color:var(--g4);text-align:center}
-
-/* NOTES */
-.notes-box{background:var(--w);border:1px solid var(--g2);border-radius:var(--radius);padding:clamp(12px,3vw,18px) clamp(14px,3vw,20px);margin-bottom:clamp(24px,5vw,40px);font-size:clamp(12px,1.6vw,13px);color:var(--g6);line-height:1.8}
-.notes-box ul{margin:0;padding-left:18px}
-.notes-box li{margin-bottom:4px}
-
-/* SECTION */
-.site-section{margin-bottom:clamp(32px,6vw,56px)}
-.section-bar{background:var(--w);border:1px solid var(--g2);border-left:4px solid var(--vo);border-radius:var(--radius);padding:clamp(14px,3vw,20px) clamp(14px,3vw,24px);margin-bottom:clamp(16px,3vw,24px)}
-.section-bar h2{font-size:clamp(16px,3vw,20px);font-weight:700;display:flex;align-items:center;gap:10px}
-.section-bar .site-meta{font-size:clamp(11px,1.5vw,13px);color:var(--g6);margin-top:4px}
-
-/* CHARTS */
-.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,2vw,16px);margin-bottom:clamp(16px,3vw,24px)}
-.chart-box{background:var(--w);border:1px solid var(--g2);border-radius:var(--radius);padding:clamp(12px,2vw,18px)}
-.chart-box h3{font-size:clamp(11px,1.4vw,12px);font-weight:700;color:var(--g4);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
+.s-title{font-size:clamp(10px,1.5vw,11px);text-transform:uppercase;letter-spacing:1px;color:var(--g4);font-weight:700;margin-bottom:14px}
+.s-row{display:flex;justify-content:space-between;align-items:baseline;padding:4px 0}
+.s-label{font-size:clamp(13px,2vw,14px);color:var(--g6)}
+.s-val{font-family:Arial,sans-serif;font-size:clamp(16px,2.5vw,18px);font-weight:700}
+.s-divider{border-top:1px solid var(--g2);margin:7px 0}
+.s-pct{display:flex;justify-content:center;align-items:center;margin:10px 0 6px;padding:6px 0;background:var(--vo-l);border-radius:6px;font-size:clamp(14px,2.2vw,16px);font-weight:700;color:var(--vo)}
+.s-sub{font-size:clamp(11px,1.5vw,12px);color:var(--g4);text-align:center}
+.notes-box{background:var(--w);border:1px solid var(--g2);border-radius:var(--r);padding:clamp(16px,3vw,22px) clamp(18px,3vw,24px);margin-bottom:clamp(28px,5vw,44px);font-size:clamp(14px,2vw,15px);color:var(--g6);line-height:1.85}
+.notes-box ul{margin:0;padding-left:20px}
+.notes-box li{margin-bottom:6px}
+.site-section{margin-bottom:clamp(36px,6vw,56px)}
+.section-bar{background:var(--w);border:1px solid var(--g2);border-left:4px solid var(--vo);border-radius:var(--r);padding:clamp(16px,3vw,22px) clamp(16px,3vw,24px);margin-bottom:clamp(18px,3vw,28px)}
+.section-bar h2{font-size:clamp(17px,3.2vw,21px);font-weight:700}
+.section-bar .site-meta{font-size:clamp(12px,1.8vw,14px);color:var(--g6);margin-top:5px}
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,2vw,16px);margin-bottom:clamp(18px,3vw,28px)}
+.chart-box{background:var(--w);border:1px solid var(--g2);border-radius:var(--r);padding:clamp(16px,3vw,22px)}
+.chart-box h3{font-size:clamp(12px,1.6vw,13px);font-weight:700;color:var(--g4);margin-bottom:14px;text-transform:uppercase;letter-spacing:.5px}
 .chart-wrap{position:relative;width:100%}
-
-/* TABLES */
-.table-card{background:var(--w);border:1px solid var(--g2);border-radius:var(--radius);overflow:hidden;margin-bottom:clamp(16px,3vw,24px)}
-.table-card caption{text-align:left;font-size:clamp(11px,1.4vw,12px);font-weight:700;color:var(--g4);text-transform:uppercase;letter-spacing:.5px;padding:14px 16px 8px;background:var(--w)}
-.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
-table{width:100%;border-collapse:collapse;font-size:clamp(11px,1.5vw,13px);min-width:580px}
-thead th{text-align:left;padding:8px 12px;font-size:clamp(10px,1.2vw,11px);font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--g4);border-bottom:2px solid var(--vd);white-space:nowrap;position:sticky;top:0;background:var(--w);z-index:1}
+.tbl-title{font-size:clamp(15px,2.4vw,17px);font-weight:700;color:var(--vd);margin-bottom:12px;padding-left:2px}
+.tbl-card{background:var(--w);border:1px solid var(--g2);border-radius:var(--r);overflow:hidden;margin-bottom:clamp(22px,4vw,32px)}
+.tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:clamp(14px,2.2vw,15px);min-width:620px}
+thead th{text-align:left;padding:13px 14px;font-size:clamp(11px,1.6vw,12px);font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--g4);border-bottom:2px solid var(--vd);white-space:nowrap;position:sticky;top:0;background:var(--w);z-index:1}
 thead th.r{text-align:right}
-tbody td{padding:7px 12px;border-bottom:1px solid var(--g1);white-space:nowrap}
-tbody td.mono{font-family:Arial,sans-serif;font-size:clamp(10px,1.3vw,12px)}
+tbody td{padding:11px 14px;border-bottom:1px solid var(--g1);white-space:nowrap}
+tbody td.m{font-family:Arial,sans-serif;font-size:clamp(13px,2vw,15px)}
 tbody td.r{text-align:right}
-tbody td.url{font-family:Arial,sans-serif;font-size:clamp(10px,1.2vw,11px);color:var(--g6)}
+tbody td.u{font-family:Arial,sans-serif;font-size:clamp(13px,2vw,14px);color:var(--g6)}
 tbody tr:hover{background:var(--g1)}
-.total-row td{font-weight:700;border-top:2px solid var(--vd);border-bottom:none;padding-top:10px}
-
-/* FOOTER */
-footer{background:var(--w);border-top:1px solid var(--g2);padding:clamp(16px,3vw,24px) 0;margin-top:clamp(24px,5vw,40px);font-size:11px;color:var(--g4);text-align:center}
-
-/* RESPONSIVE */
-@media(max-width:700px){
-  .summary-grid{grid-template-columns:1fr}
-  .chart-grid{grid-template-columns:1fr}
-  .meta-pills{gap:6px}
-  .meta-pills span{font-size:11px;padding:3px 10px}
-}
-@media(min-width:701px) and (max-width:900px){
-  .summary-grid{grid-template-columns:repeat(3,1fr)}
-}
-@media print{
-  body{background:white}
-  header{background:white;color:var(--vd);border-bottom:3px solid var(--vd)}
-  header::before{display:none}
-  .meta-pills span{background:var(--g1);color:var(--g6)}
-  .s-card,.chart-box,.table-card,.section-bar{break-inside:avoid;border-color:var(--g2)}
-  .notes-box{break-inside:avoid}
-}
+.tot td{font-weight:700;border-top:2px solid var(--vd);border-bottom:none;padding-top:13px}
+footer{background:var(--w);border-top:1px solid var(--g2);padding:clamp(18px,3vw,24px) 0;margin-top:clamp(28px,5vw,44px);font-size:12px;color:var(--g4);text-align:center}
+@media(max-width:700px){.summary-grid{grid-template-columns:1fr}.chart-grid{grid-template-columns:1fr}.meta-pills span{font-size:11px;padding:3px 10px}tbody td{padding:10px 12px}thead th{padding:11px 12px}}
+@media print{body{background:white}header{background:white;color:var(--vd);border-bottom:3px solid var(--vd)}header::before{display:none}.s-card,.chart-box,.tbl-card,.section-bar{break-inside:avoid}}
 </style>
 </head>
 <body>
-
-<header>
-  <div class="container">
-    <div class="logo">VitrA</div>
-    <h1>Karo Kategorisi Trafik Analizi</h1>
-    <div class="meta-pills">
-      <span>Kaynak: Google Analytics 4</span>
-      <span>Dönem: Son 12 Ay (Mar 2025 - Mar 2026)</span>
-      <span>Metrik: Oturum (Session)</span>
-    </div>
-  </div>
-</header>
-
+<header><div class="container">
+<div class="logo">VitrA</div>
+<h1>Karo Kategorisi Trafik Analizi</h1>
+<div class="meta-pills"><span>Kaynak: Google Analytics 4</span><span>Dönem: Son 12 Ay (Mar 2025 - Mar 2026)</span><span>Metrik: Oturum (Session)</span></div>
+</div></header>
 <div class="container">
+<div class="summary-grid">
+<div class="s-card"><div class="s-title">İngiltere (vitra.co.uk)</div><div class="s-row"><span class="s-label">Toplam Site</span><span class="s-val">249.967</span></div><div class="s-divider"></div><div class="s-row"><span class="s-label">Karo</span><span class="s-val" style="color:var(--vo)">17.821</span></div><div class="s-pct">%7,1</div><div class="s-sub">aylık ort. ~1.485 oturum</div></div>
+<div class="s-card"><div class="s-title">Almanya (vitra-bad.de)</div><div class="s-row"><span class="s-label">Toplam Site</span><span class="s-val">42.945</span></div><div class="s-divider"></div><div class="s-row"><span class="s-label">Karo</span><span class="s-val" style="color:var(--vo)">3.624</span></div><div class="s-pct">%8,4</div><div class="s-sub">aylık ort. ~302 oturum</div></div>
+<div class="s-card"><div class="s-title">Toplam (UK + DE)</div><div class="s-row"><span class="s-label">Toplam Site</span><span class="s-val">292.912</span></div><div class="s-divider"></div><div class="s-row"><span class="s-label">Karo</span><span class="s-val" style="color:var(--vo)">21.445</span></div><div class="s-pct">%7,3</div><div class="s-sub">aylık ort. ~1.787 oturum</div></div>
+</div>
+<div class="notes-box"><ul>
+<li>UK sitesinin toplam oturumlarının <strong>%7,1'i</strong> karo sayfalarından geliyor. Karo kategorisi kaldırıldığında son 12 ayda <strong>17.821 oturum</strong> karşılığı trafik etkilenecek.</li>
+<li>DE sitesinde karo payı oransal olarak daha yüksek: <strong>%8,4</strong>. Son 12 ayda <strong>3.624 oturum</strong> karşılığı trafik etkilenecek.</li>
+<li>İki site toplamında son 12 aylık karo trafiği <strong>21.445 oturum</strong>, aylık ortalamada <strong>~1.787 oturum</strong> seviyesinde.</li>
+</ul></div>
 
-  <!-- Özet Kartları -->
-  <div class="summary-grid">
-    <div class="s-card">
-      <div class="s-title">İngiltere (vitra.co.uk)</div>
-      <div class="s-row"><span class="s-label">Toplam Site</span><span class="s-val">249.967</span></div>
-      <div class="s-divider"></div>
-      <div class="s-row"><span class="s-label">Karo</span><span class="s-val" style="color:var(--vo)">17.821</span></div>
-      <div class="s-pct">%7,1</div>
-      <div class="s-sub">aylık ort. ~1.485 oturum</div>
-    </div>
-    <div class="s-card">
-      <div class="s-title">Almanya (vitra-bad.de)</div>
-      <div class="s-row"><span class="s-label">Toplam Site</span><span class="s-val">42.945</span></div>
-      <div class="s-divider"></div>
-      <div class="s-row"><span class="s-label">Karo</span><span class="s-val" style="color:var(--vo)">3.624</span></div>
-      <div class="s-pct">%8,4</div>
-      <div class="s-sub">aylık ort. ~302 oturum</div>
-    </div>
-    <div class="s-card">
-      <div class="s-title">Toplam (UK + DE)</div>
-      <div class="s-row"><span class="s-label">Toplam Site</span><span class="s-val">292.912</span></div>
-      <div class="s-divider"></div>
-      <div class="s-row"><span class="s-label">Karo</span><span class="s-val" style="color:var(--vo)">21.445</span></div>
-      <div class="s-pct">%7,3</div>
-      <div class="s-sub">aylık ort. ~1.787 oturum</div>
-    </div>
-  </div>
+<div class="site-section">
+<div class="section-bar"><h2>vitra.co.uk - İngiltere</h2><div class="site-meta">Toplam site trafiği (son 12 ay): 249.967 oturum - 209.379 kullanıcı</div></div>
+<div class="chart-grid">
+<div class="chart-box"><h3>Karo vs Diğer Trafik</h3><div class="chart-wrap" style="height:clamp(210px,32vw,270px)"><canvas id="ukPie"></canvas></div></div>
+<div class="chart-box"><h3>Karo Trafiği - Kanal Dağılımı</h3><div class="chart-wrap" style="height:clamp(210px,32vw,270px)"><canvas id="ukCh"></canvas></div></div>
+</div>
+<div class="tbl-title">URL Bazlı Karo Trafiği (Son 12 Ay - Oturum)</div>
+<div class="tbl-card"><div class="tbl-scroll"><table>
+<thead><tr><th>URL</th><th class="r">Son 12 Ay</th><th class="r">Aylık Ort.</th><th class="r">Kullanıcı (12 Ay)</th><th class="r">Kullanıcı (Ay)</th><th>Kategori</th></tr></thead>
+<tbody>
+<tr><td class="u">/tiles</td><td class="m r">6.777</td><td class="m r">565</td><td class="m r">6.268</td><td class="m r">522</td><td>Ana Karo Sayfası</td></tr>
+<tr><td class="u">/tiles/residential-flooring</td><td class="m r">1.742</td><td class="m r">145</td><td class="m r">1.741</td><td class="m r">145</td><td>Konut Zemin</td></tr>
+<tr><td class="u">/tiles/porcelain-tiles</td><td class="m r">527</td><td class="m r">44</td><td class="m r">489</td><td class="m r">41</td><td>Porselen Karolar</td></tr>
+<tr><td class="u">/tiles/floor-tiles</td><td class="m r">427</td><td class="m r">36</td><td class="m r">368</td><td class="m r">31</td><td>Yer Karoları</td></tr>
+<tr><td class="u">/tiles/wall-tiles</td><td class="m r">419</td><td class="m r">35</td><td class="m r">372</td><td class="m r">31</td><td>Duvar Karoları</td></tr>
+<tr><td class="u">/tiles/commercial-industrial-areas</td><td class="m r">264</td><td class="m r">22</td><td class="m r">255</td><td class="m r">21</td><td>Ticari / Endüstriyel</td></tr>
+<tr><td class="u">/tiles/bathroom</td><td class="m r">139</td><td class="m r">12</td><td class="m r">125</td><td class="m r">10</td><td>Banyo Karoları</td></tr>
+<tr><td class="u">/tiles/balcony-terrace</td><td class="m r">103</td><td class="m r">9</td><td class="m r">100</td><td class="m r">8</td><td>Balkon / Teras</td></tr>
+<tr><td class="u">/tiles/pool</td><td class="m r">76</td><td class="m r">6</td><td class="m r">70</td><td class="m r">6</td><td>Havuz</td></tr>
+<tr><td class="u">/tiles/kitchen-backsplash</td><td class="m r">46</td><td class="m r">4</td><td class="m r">41</td><td class="m r">3</td><td>Mutfak Tezgah Arkası</td></tr>
+<tr style="color:var(--g4)"><td class="u">Diğer /tiles/ ürün detay sayfaları</td><td class="m r">7.301</td><td class="m r">608</td><td class="m r">6.031</td><td class="m r">503</td><td>Ürün Detay</td></tr>
+<tr class="tot"><td>Toplam Karo</td><td class="m r">17.821</td><td class="m r">1.485</td><td class="m r">15.860</td><td class="m r">1.322</td><td></td></tr>
+</tbody></table></div></div>
 
-  <div class="notes-box">
-    <ul>
-      <li>UK sitesinin toplam oturumlarının <strong>%7,1'i</strong> karo sayfalarından geliyor. Karo kategorisi kaldırıldığında son 12 ayda <strong>17.821 oturum</strong> karşılığı trafik etkilenecek.</li>
-      <li>DE sitesinde karo payı oransal olarak daha yüksek: <strong>%8,4</strong>. Son 12 ayda <strong>3.624 oturum</strong> karşılığı trafik etkilenecek.</li>
-      <li>İki site toplamında son 12 aylık karo trafiği <strong>21.445 oturum</strong>, aylık ortalamada <strong>~1.787 oturum</strong> seviyesinde.</li>
-    </ul>
-  </div>
-
-  <!-- UK -->
-  <div class="site-section">
-    <div class="section-bar">
-      <h2>vitra.co.uk - İngiltere</h2>
-      <div class="site-meta">Toplam site trafiği (son 12 ay): 249.967 oturum - 209.379 kullanıcı</div>
-    </div>
-
-    <div class="chart-grid">
-      <div class="chart-box">
-        <h3>Karo vs Diğer Trafik</h3>
-        <div class="chart-wrap" style="height:clamp(200px,30vw,260px)"><canvas id="ukPie"></canvas></div>
-      </div>
-      <div class="chart-box">
-        <h3>Karo Trafiği - Kanal Dağılımı</h3>
-        <div class="chart-wrap" style="height:clamp(200px,30vw,260px)"><canvas id="ukCh"></canvas></div>
-      </div>
-    </div>
-
-    <div class="table-card">
-      <caption>URL bazlı karo trafiği (son 12 ay - oturum)</caption>
-      <div class="table-scroll">
-      <table>
-        <thead><tr><th>URL</th><th class="r">Son 12 Ay</th><th class="r">Aylık Ort.</th><th class="r">Kullanıcı (12 Ay)</th><th class="r">Kullanıcı (Ay)</th><th>Kategori</th></tr></thead>
-        <tbody>
-          <tr><td class="url">/tiles</td><td class="mono r">6.777</td><td class="mono r">565</td><td class="mono r">6.268</td><td class="mono r">522</td><td>Ana Karo Sayfası</td></tr>
-          <tr><td class="url">/tiles/residential-flooring</td><td class="mono r">1.742</td><td class="mono r">145</td><td class="mono r">1.741</td><td class="mono r">145</td><td>Konut Zemin</td></tr>
-          <tr><td class="url">/tiles/porcelain-tiles</td><td class="mono r">527</td><td class="mono r">44</td><td class="mono r">489</td><td class="mono r">41</td><td>Porselen Karolar</td></tr>
-          <tr><td class="url">/tiles/floor-tiles</td><td class="mono r">427</td><td class="mono r">36</td><td class="mono r">368</td><td class="mono r">31</td><td>Yer Karoları</td></tr>
-          <tr><td class="url">/tiles/wall-tiles</td><td class="mono r">419</td><td class="mono r">35</td><td class="mono r">372</td><td class="mono r">31</td><td>Duvar Karoları</td></tr>
-          <tr><td class="url">/tiles/commercial-industrial-areas</td><td class="mono r">264</td><td class="mono r">22</td><td class="mono r">255</td><td class="mono r">21</td><td>Ticari / Endüstriyel</td></tr>
-          <tr><td class="url">/tiles/bathroom</td><td class="mono r">139</td><td class="mono r">12</td><td class="mono r">125</td><td class="mono r">10</td><td>Banyo Karoları</td></tr>
-          <tr><td class="url">/tiles/balcony-terrace</td><td class="mono r">103</td><td class="mono r">9</td><td class="mono r">100</td><td class="mono r">8</td><td>Balkon / Teras</td></tr>
-          <tr><td class="url">/tiles/pool</td><td class="mono r">76</td><td class="mono r">6</td><td class="mono r">70</td><td class="mono r">6</td><td>Havuz</td></tr>
-          <tr><td class="url">/tiles/kitchen-backsplash</td><td class="mono r">46</td><td class="mono r">4</td><td class="mono r">41</td><td class="mono r">3</td><td>Mutfak Tezgah Arkası</td></tr>
-          <tr style="color:var(--g4)"><td class="url">Diğer /tiles/ ürün detay sayfaları</td><td class="mono r">7.301</td><td class="mono r">608</td><td class="mono r">6.031</td><td class="mono r">503</td><td>Ürün Detay</td></tr>
-          <tr class="total-row"><td>Toplam Karo</td><td class="mono r">17.821</td><td class="mono r">1.485</td><td class="mono r">15.860</td><td class="mono r">1.322</td><td></td></tr>
-        </tbody>
-      </table>
-      </div>
-    </div>
-
-    <div class="table-card">
-      <caption>Kanal bazlı karo trafiği (son 12 ay - oturum)</caption>
-      <div class="table-scroll">
-      <table>
-        <thead><tr><th>Kanal</th><th class="r">Karo (12 Ay)</th><th class="r">Karo (Ay)</th><th class="r">Karo Payı</th><th class="r">Site Toplam (12 Ay)</th><th class="r">Site Toplam (Ay)</th><th class="r">Karo / Toplam</th></tr></thead>
-        <tbody>
-          <tr><td>Organic Search</td><td class="mono r">8.851</td><td class="mono r">738</td><td class="mono r">%49,7</td><td class="mono r">104.611</td><td class="mono r">8.718</td><td class="mono r">%8,5</td></tr>
-          <tr><td>Direct</td><td class="mono r">8.048</td><td class="mono r">671</td><td class="mono r">%45,2</td><td class="mono r">60.722</td><td class="mono r">5.060</td><td class="mono r">%13,3</td></tr>
-          <tr><td>Paid Search</td><td class="mono r">704</td><td class="mono r">59</td><td class="mono r">%3,9</td><td class="mono r">55.046</td><td class="mono r">4.587</td><td class="mono r">%1,3</td></tr>
-          <tr><td>Referral</td><td class="mono r">125</td><td class="mono r">10</td><td class="mono r">%0,7</td><td class="mono r">5.197</td><td class="mono r">433</td><td class="mono r">%2,4</td></tr>
-          <tr><td>Diğer</td><td class="mono r">93</td><td class="mono r">8</td><td class="mono r">%0,5</td><td class="mono r">24.391</td><td class="mono r">2.033</td><td class="mono r">%0,4</td></tr>
-          <tr class="total-row"><td>Toplam</td><td class="mono r">17.821</td><td class="mono r">1.485</td><td class="mono r">%100</td><td class="mono r">249.967</td><td class="mono r">20.831</td><td class="mono r">%7,1</td></tr>
-        </tbody>
-      </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- DE -->
-  <div class="site-section">
-    <div class="section-bar">
-      <h2>vitra-bad.de - Almanya</h2>
-      <div class="site-meta">Toplam site trafiği (son 12 ay): 42.945 oturum - 34.931 kullanıcı</div>
-    </div>
-
-    <div class="chart-grid">
-      <div class="chart-box">
-        <h3>Karo vs Diğer Trafik</h3>
-        <div class="chart-wrap" style="height:clamp(200px,30vw,260px)"><canvas id="dePie"></canvas></div>
-      </div>
-      <div class="chart-box">
-        <h3>Karo Trafiği - Kanal Dağılımı</h3>
-        <div class="chart-wrap" style="height:clamp(200px,30vw,260px)"><canvas id="deCh"></canvas></div>
-      </div>
-    </div>
-
-    <div class="table-card">
-      <caption>URL bazlı karo trafiği (son 12 ay - oturum)</caption>
-      <div class="table-scroll">
-      <table>
-        <thead><tr><th>URL</th><th class="r">Son 12 Ay</th><th class="r">Aylık Ort.</th><th class="r">Kullanıcı (12 Ay)</th><th class="r">Kullanıcı (Ay)</th><th>Kategori</th></tr></thead>
-        <tbody>
-          <tr><td class="url">/fliesen</td><td class="mono r">701</td><td class="mono r">58</td><td class="mono r">597</td><td class="mono r">50</td><td>Ana Fliesen Sayfası</td></tr>
-          <tr><td class="url">/fliesen/porzellanfliesen</td><td class="mono r">271</td><td class="mono r">23</td><td class="mono r">243</td><td class="mono r">20</td><td>Porselen Karolar</td></tr>
-          <tr><td class="url">/fliesenkollektionen</td><td class="mono r">211</td><td class="mono r">18</td><td class="mono r">197</td><td class="mono r">16</td><td>Koleksiyonlar</td></tr>
-          <tr><td class="url">/fliesen/bodenfliesen</td><td class="mono r">206</td><td class="mono r">17</td><td class="mono r">191</td><td class="mono r">16</td><td>Yer Karoları</td></tr>
-          <tr><td class="url">/fliesen/wandfliesen</td><td class="mono r">89</td><td class="mono r">7</td><td class="mono r">74</td><td class="mono r">6</td><td>Duvar Karoları</td></tr>
-          <tr style="color:var(--g4)"><td class="url">Diğer /fliesen/ ürün detay sayfaları</td><td class="mono r">2.146</td><td class="mono r">179</td><td class="mono r">1.890</td><td class="mono r">158</td><td>Ürün Detay</td></tr>
-          <tr class="total-row"><td>Toplam Karo</td><td class="mono r">3.624</td><td class="mono r">302</td><td class="mono r">3.192</td><td class="mono r">266</td><td></td></tr>
-        </tbody>
-      </table>
-      </div>
-    </div>
-
-    <div class="table-card">
-      <caption>Kanal bazlı karo trafiği (son 12 ay - oturum)</caption>
-      <div class="table-scroll">
-      <table>
-        <thead><tr><th>Kanal</th><th class="r">Karo (12 Ay)</th><th class="r">Karo (Ay)</th><th class="r">Karo Payı</th><th class="r">Site Toplam (12 Ay)</th><th class="r">Site Toplam (Ay)</th><th class="r">Karo / Toplam</th></tr></thead>
-        <tbody>
-          <tr><td>Organic Search</td><td class="mono r">3.231</td><td class="mono r">269</td><td class="mono r">%89,2</td><td class="mono r">31.919</td><td class="mono r">2.660</td><td class="mono r">%10,1</td></tr>
-          <tr><td>Direct</td><td class="mono r">334</td><td class="mono r">28</td><td class="mono r">%9,2</td><td class="mono r">7.882</td><td class="mono r">657</td><td class="mono r">%4,2</td></tr>
-          <tr><td>Unassigned</td><td class="mono r">38</td><td class="mono r">3</td><td class="mono r">%1,0</td><td class="mono r">1.230</td><td class="mono r">103</td><td class="mono r">%3,1</td></tr>
-          <tr><td>Referral</td><td class="mono r">21</td><td class="mono r">2</td><td class="mono r">%0,6</td><td class="mono r">1.740</td><td class="mono r">145</td><td class="mono r">%1,2</td></tr>
-          <tr class="total-row"><td>Toplam</td><td class="mono r">3.624</td><td class="mono r">302</td><td class="mono r">%100</td><td class="mono r">42.945</td><td class="mono r">3.579</td><td class="mono r">%8,4</td></tr>
-        </tbody>
-      </table>
-      </div>
-    </div>
-  </div>
-
+<div class="tbl-title">Kanal Bazlı Karo Trafiği (Son 12 Ay - Oturum)</div>
+<div class="tbl-card"><div class="tbl-scroll"><table>
+<thead><tr><th>Kanal</th><th class="r">Karo (12 Ay)</th><th class="r">Karo (Ay)</th><th class="r">Karo Payı</th><th class="r">Site Toplam (12 Ay)</th><th class="r">Site Toplam (Ay)</th><th class="r">Karo / Toplam</th></tr></thead>
+<tbody>
+<tr><td>Organic Search</td><td class="m r">8.851</td><td class="m r">738</td><td class="m r">%49,7</td><td class="m r">104.611</td><td class="m r">8.718</td><td class="m r">%8,5</td></tr>
+<tr><td>Direct</td><td class="m r">8.048</td><td class="m r">671</td><td class="m r">%45,2</td><td class="m r">60.722</td><td class="m r">5.060</td><td class="m r">%13,3</td></tr>
+<tr><td>Paid Search</td><td class="m r">704</td><td class="m r">59</td><td class="m r">%3,9</td><td class="m r">55.046</td><td class="m r">4.587</td><td class="m r">%1,3</td></tr>
+<tr><td>Referral</td><td class="m r">125</td><td class="m r">10</td><td class="m r">%0,7</td><td class="m r">5.197</td><td class="m r">433</td><td class="m r">%2,4</td></tr>
+<tr><td>Diğer</td><td class="m r">93</td><td class="m r">8</td><td class="m r">%0,5</td><td class="m r">24.391</td><td class="m r">2.033</td><td class="m r">%0,4</td></tr>
+<tr class="tot"><td>Toplam</td><td class="m r">17.821</td><td class="m r">1.485</td><td class="m r">%100</td><td class="m r">249.967</td><td class="m r">20.831</td><td class="m r">%7,1</td></tr>
+</tbody></table></div></div>
 </div>
 
+<div class="site-section">
+<div class="section-bar"><h2>vitra-bad.de - Almanya</h2><div class="site-meta">Toplam site trafiği (son 12 ay): 42.945 oturum - 34.931 kullanıcı</div></div>
+<div class="chart-grid">
+<div class="chart-box"><h3>Karo vs Diğer Trafik</h3><div class="chart-wrap" style="height:clamp(210px,32vw,270px)"><canvas id="dePie"></canvas></div></div>
+<div class="chart-box"><h3>Karo Trafiği - Kanal Dağılımı</h3><div class="chart-wrap" style="height:clamp(210px,32vw,270px)"><canvas id="deCh"></canvas></div></div>
+</div>
+<div class="tbl-title">URL Bazlı Karo Trafiği (Son 12 Ay - Oturum)</div>
+<div class="tbl-card"><div class="tbl-scroll"><table>
+<thead><tr><th>URL</th><th class="r">Son 12 Ay</th><th class="r">Aylık Ort.</th><th class="r">Kullanıcı (12 Ay)</th><th class="r">Kullanıcı (Ay)</th><th>Kategori</th></tr></thead>
+<tbody>
+<tr><td class="u">/fliesen</td><td class="m r">701</td><td class="m r">58</td><td class="m r">597</td><td class="m r">50</td><td>Ana Fliesen Sayfası</td></tr>
+<tr><td class="u">/fliesen/porzellanfliesen</td><td class="m r">271</td><td class="m r">23</td><td class="m r">243</td><td class="m r">20</td><td>Porselen Karolar</td></tr>
+<tr><td class="u">/fliesenkollektionen</td><td class="m r">211</td><td class="m r">18</td><td class="m r">197</td><td class="m r">16</td><td>Koleksiyonlar</td></tr>
+<tr><td class="u">/fliesen/bodenfliesen</td><td class="m r">206</td><td class="m r">17</td><td class="m r">191</td><td class="m r">16</td><td>Yer Karoları</td></tr>
+<tr><td class="u">/fliesen/wandfliesen</td><td class="m r">89</td><td class="m r">7</td><td class="m r">74</td><td class="m r">6</td><td>Duvar Karoları</td></tr>
+<tr style="color:var(--g4)"><td class="u">Diğer /fliesen/ ürün detay sayfaları</td><td class="m r">2.146</td><td class="m r">179</td><td class="m r">1.890</td><td class="m r">158</td><td>Ürün Detay</td></tr>
+<tr class="tot"><td>Toplam Karo</td><td class="m r">3.624</td><td class="m r">302</td><td class="m r">3.192</td><td class="m r">266</td><td></td></tr>
+</tbody></table></div></div>
+
+<div class="tbl-title">Kanal Bazlı Karo Trafiği (Son 12 Ay - Oturum)</div>
+<div class="tbl-card"><div class="tbl-scroll"><table>
+<thead><tr><th>Kanal</th><th class="r">Karo (12 Ay)</th><th class="r">Karo (Ay)</th><th class="r">Karo Payı</th><th class="r">Site Toplam (12 Ay)</th><th class="r">Site Toplam (Ay)</th><th class="r">Karo / Toplam</th></tr></thead>
+<tbody>
+<tr><td>Organic Search</td><td class="m r">3.231</td><td class="m r">269</td><td class="m r">%89,2</td><td class="m r">31.919</td><td class="m r">2.660</td><td class="m r">%10,1</td></tr>
+<tr><td>Direct</td><td class="m r">334</td><td class="m r">28</td><td class="m r">%9,2</td><td class="m r">7.882</td><td class="m r">657</td><td class="m r">%4,2</td></tr>
+<tr><td>Unassigned</td><td class="m r">38</td><td class="m r">3</td><td class="m r">%1,0</td><td class="m r">1.230</td><td class="m r">103</td><td class="m r">%3,1</td></tr>
+<tr><td>Referral</td><td class="m r">21</td><td class="m r">2</td><td class="m r">%0,6</td><td class="m r">1.740</td><td class="m r">145</td><td class="m r">%1,2</td></tr>
+<tr class="tot"><td>Toplam</td><td class="m r">3.624</td><td class="m r">302</td><td class="m r">%100</td><td class="m r">42.945</td><td class="m r">3.579</td><td class="m r">%8,4</td></tr>
+</tbody></table></div></div>
+</div>
+</div>
 <footer><div class="container">Inbound SEO - Veri Kaynağı: Google Analytics 4 - Mart 2026</div></footer>
-
 <script>
-const V={o:'#E8490F',dk:'#1A1A1A',g6:'#6B6B6B',g4:'#9E9E9E',g2:'#E5E5E5',teal:'#0D7377',amber:'#C47A0A'};
-const fnt={family:'Calibri, Arial, sans-serif'};
+const V={o:'#E8490F',dk:'#1A1A1A',g6:'#6B6B6B',g4:'#9E9E9E',g2:'#E5E5E5',amber:'#C47A0A'};
 const base={responsive:true,maintainAspectRatio:false};
-const leg={position:'bottom',labels:{font:{...fnt,size:11},padding:10,usePointStyle:true,pointStyle:'rectRounded',boxWidth:10}};
+const leg={position:'bottom',labels:{font:{family:'Calibri,Arial',size:12},padding:12,usePointStyle:true,pointStyle:'rectRounded',boxWidth:10}};
 const tt={callbacks:{label:c=>{const t=c.dataset.data.reduce((a,b)=>a+b,0);return` ${c.label}: ${c.parsed.toLocaleString('tr-TR')} (%${Math.round(c.parsed/t*100)})`}}};
-
-new Chart(document.getElementById('ukPie'),{type:'doughnut',
-  data:{labels:['Diğer (232K)','Karo (18K)'],datasets:[{data:[232146,17821],backgroundColor:[V.g2,V.o],borderWidth:2,borderColor:'#fff'}]},
-  options:{...base,cutout:'60%',plugins:{legend:leg,tooltip:tt}}});
-
-new Chart(document.getElementById('ukCh'),{type:'doughnut',
-  data:{labels:['Organic (%50)','Direct (%45)','Paid (%4)','Diğer (%1)'],datasets:[{data:[8851,8048,704,218],backgroundColor:[V.dk,V.g6,V.amber,V.g4],borderWidth:2,borderColor:'#fff'}]},
-  options:{...base,cutout:'60%',plugins:{legend:leg,tooltip:tt}}});
-
-new Chart(document.getElementById('dePie'),{type:'doughnut',
-  data:{labels:['Diğer (39K)','Karo (4K)'],datasets:[{data:[39321,3624],backgroundColor:[V.g2,V.o],borderWidth:2,borderColor:'#fff'}]},
-  options:{...base,cutout:'60%',plugins:{legend:leg,tooltip:tt}}});
-
-new Chart(document.getElementById('deCh'),{type:'doughnut',
-  data:{labels:['Organic (%89)','Direct (%9)','Diğer (%2)'],datasets:[{data:[3231,334,59],backgroundColor:[V.dk,V.g6,V.g4],borderWidth:2,borderColor:'#fff'}]},
-  options:{...base,cutout:'60%',plugins:{legend:leg,tooltip:tt}}});
+new Chart(document.getElementById('ukPie'),{type:'doughnut',data:{labels:['Di\u011fer (232K)','Karo (18K)'],datasets:[{data:[232146,17821],backgroundColor:[V.g2,V.o],borderWidth:2,borderColor:'#fff'}]},options:{...base,cutout:'60%',plugins:{legend:leg,tooltip:tt}}});
+new Chart(document.getElementById('ukCh'),{type:'doughnut',data:{labels:['Organic (%50)','Direct (%45)','Paid (%4)','Di\u011fer (%1)'],datasets:[{data:[8851,8048,704,218],backgroundColor:[V.dk,V.g6,V.amber,V.g4],borderWidth:2,borderColor:'#fff'}]},options:{...base,cutout:'60%',plugins:{legend:leg,tooltip:tt}}});
+new Chart(document.getElementById('dePie'),{type:'doughnut',data:{labels:['Di\u011fer (39K)','Karo (4K)'],datasets:[{data:[39321,3624],backgroundColor:[V.g2,V.o],borderWidth:2,borderColor:'#fff'}]},options:{...base,cutout:'60%',plugins:{legend:leg,tooltip:tt}}});
+new Chart(document.getElementById('deCh'),{type:'doughnut',data:{labels:['Organic (%89)','Direct (%9)','Di\u011fer (%2)'],datasets:[{data:[3231,334,59],backgroundColor:[V.dk,V.g6,V.g4],borderWidth:2,borderColor:'#fff'}]},options:{...base,cutout:'60%',plugins:{legend:leg,tooltip:tt}}});
 </script>
 </body>
 </html>
