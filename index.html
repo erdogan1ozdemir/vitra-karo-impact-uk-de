@@ -18,7 +18,7 @@ header .logo{font-size:13px;font-weight:700;letter-spacing:3px;text-transform:up
 header h1{font-size:clamp(20px,4.5vw,26px);font-weight:700;line-height:1.3}
 .meta-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .meta-pills span{font-size:12px;color:rgba(255,255,255,.5);background:rgba(255,255,255,.07);padding:4px 12px;border-radius:20px}
-.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,2vw,16px);margin:clamp(24px,4vw,36px) 0 clamp(14px,2vw,18px)}
+.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,2vw,16px);margin:clamp(16px,3vw,24px) 0 clamp(14px,2vw,18px)}
 .s-card{background:var(--w);border:1px solid var(--g2);border-radius:var(--r);padding:clamp(16px,3vw,24px);transition:box-shadow .2s}
 .s-card:hover{box-shadow:0 2px 12px rgba(0,0,0,.06)}
 .s-title{font-size:clamp(10px,1.5vw,11px);text-transform:uppercase;letter-spacing:1px;color:var(--g4);font-weight:700;margin-bottom:14px}
@@ -52,7 +52,10 @@ tbody td.u{font-family:Arial,sans-serif;font-size:clamp(13px,2vw,14px);color:var
 tbody tr:hover{background:var(--g1)}
 .tot td{font-weight:700;border-top:2px solid var(--vd);border-bottom:none;padding-top:13px}
 footer{background:var(--w);border-top:1px solid var(--g2);padding:clamp(18px,3vw,24px) 0;margin-top:clamp(28px,5vw,44px);font-size:12px;color:var(--g4);text-align:center}
-@media(max-width:700px){.summary-grid{grid-template-columns:1fr}.chart-grid{grid-template-columns:1fr}.meta-pills span{font-size:11px;padding:3px 10px}tbody td{padding:10px 12px}thead th{padding:11px 12px}}
+.sec-intro{margin-bottom:clamp(16px,3vw,24px)}
+.sec-intro h2{font-size:clamp(18px,3vw,22px);font-weight:700;color:var(--vd);margin-bottom:8px}
+.sec-intro p{font-size:clamp(13px,2vw,15px);color:var(--g6);line-height:1.7}
+@media(max-width:700px){.summary-grid{grid-template-columns:repeat(2,1fr)}.chart-grid{grid-template-columns:1fr}.meta-pills span{font-size:11px;padding:3px 10px}tbody td{padding:10px 12px}thead th{padding:11px 12px}}
 @media print{body{background:white}header{background:white;color:var(--vd);border-bottom:3px solid var(--vd)}header::before{display:none}.s-card,.chart-box,.tbl-card,.section-bar{break-inside:avoid}}
 </style>
 </head>
@@ -60,79 +63,89 @@ footer{background:var(--w);border-top:1px solid var(--g2);padding:clamp(18px,3vw
 <header><div class="container">
 <div class="logo">VitrA</div>
 <h1>Karo Kategorisi Trafik Analizi</h1>
-<div class="meta-pills"><span>Kaynak: Google Analytics 4</span><span>Dönem: Son 12 Ay (Mar 2025 - Mar 2026)</span><span>Metrik: Oturum (Session)</span></div>
+<div class="meta-pills"><span>Kaynak: Google Analytics 4</span><span>D&#246;nem: Son 12 Ay (Mar 2025 - Mar 2026)</span><span>Metrik: Oturum (Session)</span></div>
 </div></header>
+
 <div class="container">
-<div class="summary-grid">
-<div class="s-card"><div class="s-title">İngiltere (vitra.co.uk)</div><div class="s-row"><span class="s-label">Toplam Site</span><span class="s-val">249.967</span></div><div class="s-divider"></div><div class="s-row"><span class="s-label">Karo</span><span class="s-val" style="color:var(--vo)">17.821</span></div><div class="s-pct">%7,1</div><div class="s-sub">aylık ort. ~1.485 oturum</div></div>
-<div class="s-card"><div class="s-title">Almanya (vitra-bad.de)</div><div class="s-row"><span class="s-label">Toplam Site</span><span class="s-val">42.945</span></div><div class="s-divider"></div><div class="s-row"><span class="s-label">Karo</span><span class="s-val" style="color:var(--vo)">3.624</span></div><div class="s-pct">%8,4</div><div class="s-sub">aylık ort. ~302 oturum</div></div>
-<div class="s-card"><div class="s-title">Toplam (UK + DE)</div><div class="s-row"><span class="s-label">Toplam Site</span><span class="s-val">292.912</span></div><div class="s-divider"></div><div class="s-row"><span class="s-label">Karo</span><span class="s-val" style="color:var(--vo)">21.445</span></div><div class="s-pct">%7,3</div><div class="s-sub">aylık ort. ~1.787 oturum</div></div>
+
+<div class="sec-intro" style="margin-top:clamp(28px,5vw,40px)">
+<h2>Karo Sayfalar&#305;n&#305;n Son 1 Y&#305;l Performans&#305;</h2>
+<p>Karo sayfalar&#305; i&#231;eren VitrA &#252;lke sitelerinde son 12 aydaki toplam site trafi&#287;i ile karo kategorisine ait sayfalar&#305;n ald&#305;&#287;&#305; trafik kar&#351;&#305;la&#351;t&#305;r&#305;lm&#305;&#351;t&#305;r. Metrik olarak GA4 oturum (session) verisi kullan&#305;lm&#305;&#351;, karo sayfalar&#305; URL pattern'leri &#252;zerinden filtelenmi&#351;tir.</p>
 </div>
+
+<div class="summary-grid">
+<div class="s-card"><div class="s-title">&#304;ngiltere (vitra.co.uk)</div><div class="s-row"><span class="s-label">Toplam Site</span><span class="s-val">249.967</span></div><div class="s-divider"></div><div class="s-row"><span class="s-label">Karo</span><span class="s-val" style="color:var(--vo)">17.821</span></div><div class="s-pct">%7,1</div><div class="s-sub">ayl&#305;k ort. ~1.485 oturum</div></div>
+<div class="s-card"><div class="s-title">Almanya (vitra-bad.de)</div><div class="s-row"><span class="s-label">Toplam Site</span><span class="s-val">42.945</span></div><div class="s-divider"></div><div class="s-row"><span class="s-label">Karo</span><span class="s-val" style="color:var(--vo)">3.624</span></div><div class="s-pct">%8,4</div><div class="s-sub">ayl&#305;k ort. ~302 oturum</div></div>
+<div class="s-card"><div class="s-title">Global (vitraglobal.com)</div><div class="s-row"><span class="s-label">Toplam Site</span><span class="s-val">288.872</span></div><div class="s-divider"></div><div class="s-row"><span class="s-label">Karo</span><span class="s-val" style="color:var(--vo)">42.363</span></div><div class="s-pct">%14,7</div><div class="s-sub">ayl&#305;k ort. ~3.530 oturum</div></div>
+<div class="s-card"><div class="s-title">Toplam (UK + DE + Global)</div><div class="s-row"><span class="s-label">Toplam Site</span><span class="s-val">581.784</span></div><div class="s-divider"></div><div class="s-row"><span class="s-label">Karo</span><span class="s-val" style="color:var(--vo)">63.808</span></div><div class="s-pct">%11,0</div><div class="s-sub">ayl&#305;k ort. ~5.317 oturum</div></div>
+</div>
+
 <div class="notes-box"><ul>
-<li>UK sitesinin toplam oturumlarının <strong>%7,1'i</strong> karo sayfalarından geliyor. Karo kategorisi kaldırıldığında son 12 ayda <strong>17.821 oturum</strong> karşılığı trafik etkilenecek.</li>
-<li>DE sitesinde karo payı oransal olarak daha yüksek: <strong>%8,4</strong>. Son 12 ayda <strong>3.624 oturum</strong> karşılığı trafik etkilenecek.</li>
-<li>İki site toplamında son 12 aylık karo trafiği <strong>21.445 oturum</strong>, aylık ortalamada <strong>~1.787 oturum</strong> seviyesinde.</li>
+<li>UK sitesinin toplam oturumlar&#305;n&#305;n <strong>%7,1'i</strong> karo sayfalar&#305;ndan geliyor. Karo kategorisi kald&#305;r&#305;ld&#305;&#287;&#305;nda son 12 ayda <strong>17.821 oturum</strong> kar&#351;&#305;l&#305;&#287;&#305; trafik etkilenecek.</li>
+<li>DE sitesinde karo pay&#305; oransal olarak daha y&#252;ksek: <strong>%8,4</strong>. Son 12 ayda <strong>3.624 oturum</strong> kar&#351;&#305;l&#305;&#287;&#305; trafik etkilenecek.</li>
+<li>Global sitede karo pay&#305; en y&#252;ksek orana sahip: <strong>%14,7</strong>. Son 12 ayda <strong>42.363 oturum</strong> kar&#351;&#305;l&#305;&#287;&#305; trafik etkilenecek.</li>
+<li>&#220;&#231; site toplam&#305;nda son 12 ayl&#305;k karo trafi&#287;i <strong>63.808 oturum</strong>, ayl&#305;k ortalamada <strong>~5.317 oturum</strong> seviyesinde.</li>
 </ul></div>
 
+<!-- UK -->
 <div class="site-section">
-<div class="section-bar"><h2>vitra.co.uk - İngiltere</h2><div class="site-meta">Toplam site trafiği (son 12 ay): 249.967 oturum - 209.379 kullanıcı</div></div>
+<div class="section-bar"><h2>vitra.co.uk - &#304;ngiltere</h2><div class="site-meta">Toplam site trafi&#287;i (son 12 ay): 249.967 oturum - 209.379 kullan&#305;c&#305;</div></div>
 <div class="chart-grid">
-<div class="chart-box"><h3>Karo vs Diğer Trafik</h3><div class="chart-wrap" style="height:clamp(210px,32vw,270px)"><canvas id="ukPie"></canvas></div></div>
-<div class="chart-box"><h3>Karo Trafiği - Kanal Dağılımı</h3><div class="chart-wrap" style="height:clamp(210px,32vw,270px)"><canvas id="ukCh"></canvas></div></div>
+<div class="chart-box"><h3>Karo vs Di&#287;er Trafik</h3><div class="chart-wrap" style="height:clamp(210px,32vw,270px)"><canvas id="ukPie"></canvas></div></div>
+<div class="chart-box"><h3>Karo Trafi&#287;i - Kanal Da&#287;&#305;l&#305;m&#305;</h3><div class="chart-wrap" style="height:clamp(210px,32vw,270px)"><canvas id="ukCh"></canvas></div></div>
 </div>
-<div class="tbl-title">URL Bazlı Karo Trafiği (Son 12 Ay - Oturum)</div>
+<div class="tbl-title">URL Bazl&#305; Karo Trafi&#287;i (Son 12 Ay - Oturum)</div>
 <div class="tbl-card"><div class="tbl-scroll"><table>
-<thead><tr><th>URL</th><th class="r">Son 12 Ay</th><th class="r">Aylık Ort.</th><th class="r">Kullanıcı (12 Ay)</th><th class="r">Kullanıcı (Ay)</th><th>Kategori</th></tr></thead>
+<thead><tr><th>URL</th><th class="r">Son 12 Ay</th><th class="r">Ayl&#305;k Ort.</th><th class="r">Kullan&#305;c&#305; (12 Ay)</th><th class="r">Kullan&#305;c&#305; (Ay)</th><th>Kategori</th></tr></thead>
 <tbody>
-<tr><td class="u">/tiles</td><td class="m r">6.777</td><td class="m r">565</td><td class="m r">6.268</td><td class="m r">522</td><td>Ana Karo Sayfası</td></tr>
+<tr><td class="u">/tiles</td><td class="m r">6.777</td><td class="m r">565</td><td class="m r">6.268</td><td class="m r">522</td><td>Ana Karo Sayfas&#305;</td></tr>
 <tr><td class="u">/tiles/residential-flooring</td><td class="m r">1.742</td><td class="m r">145</td><td class="m r">1.741</td><td class="m r">145</td><td>Konut Zemin</td></tr>
 <tr><td class="u">/tiles/porcelain-tiles</td><td class="m r">527</td><td class="m r">44</td><td class="m r">489</td><td class="m r">41</td><td>Porselen Karolar</td></tr>
-<tr><td class="u">/tiles/floor-tiles</td><td class="m r">427</td><td class="m r">36</td><td class="m r">368</td><td class="m r">31</td><td>Yer Karoları</td></tr>
-<tr><td class="u">/tiles/wall-tiles</td><td class="m r">419</td><td class="m r">35</td><td class="m r">372</td><td class="m r">31</td><td>Duvar Karoları</td></tr>
-<tr><td class="u">/tiles/commercial-industrial-areas</td><td class="m r">264</td><td class="m r">22</td><td class="m r">255</td><td class="m r">21</td><td>Ticari / Endüstriyel</td></tr>
-<tr><td class="u">/tiles/bathroom</td><td class="m r">139</td><td class="m r">12</td><td class="m r">125</td><td class="m r">10</td><td>Banyo Karoları</td></tr>
+<tr><td class="u">/tiles/floor-tiles</td><td class="m r">427</td><td class="m r">36</td><td class="m r">368</td><td class="m r">31</td><td>Yer Karolar&#305;</td></tr>
+<tr><td class="u">/tiles/wall-tiles</td><td class="m r">419</td><td class="m r">35</td><td class="m r">372</td><td class="m r">31</td><td>Duvar Karolar&#305;</td></tr>
+<tr><td class="u">/tiles/commercial-industrial-areas</td><td class="m r">264</td><td class="m r">22</td><td class="m r">255</td><td class="m r">21</td><td>Ticari / End&#252;striyel</td></tr>
+<tr><td class="u">/tiles/bathroom</td><td class="m r">139</td><td class="m r">12</td><td class="m r">125</td><td class="m r">10</td><td>Banyo Karolar&#305;</td></tr>
 <tr><td class="u">/tiles/balcony-terrace</td><td class="m r">103</td><td class="m r">9</td><td class="m r">100</td><td class="m r">8</td><td>Balkon / Teras</td></tr>
 <tr><td class="u">/tiles/pool</td><td class="m r">76</td><td class="m r">6</td><td class="m r">70</td><td class="m r">6</td><td>Havuz</td></tr>
-<tr><td class="u">/tiles/kitchen-backsplash</td><td class="m r">46</td><td class="m r">4</td><td class="m r">41</td><td class="m r">3</td><td>Mutfak Tezgah Arkası</td></tr>
-<tr style="color:var(--g4)"><td class="u">Diğer /tiles/ ürün detay sayfaları</td><td class="m r">7.301</td><td class="m r">608</td><td class="m r">6.031</td><td class="m r">503</td><td>Ürün Detay</td></tr>
+<tr><td class="u">/tiles/kitchen-backsplash</td><td class="m r">46</td><td class="m r">4</td><td class="m r">41</td><td class="m r">3</td><td>Mutfak Tezgah Arkas&#305;</td></tr>
+<tr style="color:var(--g4)"><td class="u">Di&#287;er /tiles/ &#252;r&#252;n detay sayfalar&#305;</td><td class="m r">7.301</td><td class="m r">608</td><td class="m r">6.031</td><td class="m r">503</td><td>&#220;r&#252;n Detay</td></tr>
 <tr class="tot"><td>Toplam Karo</td><td class="m r">17.821</td><td class="m r">1.485</td><td class="m r">15.860</td><td class="m r">1.322</td><td></td></tr>
 </tbody></table></div></div>
-
-<div class="tbl-title">Kanal Bazlı Karo Trafiği (Son 12 Ay - Oturum)</div>
+<div class="tbl-title">Kanal Bazl&#305; Karo Trafi&#287;i (Son 12 Ay - Oturum)</div>
 <div class="tbl-card"><div class="tbl-scroll"><table>
-<thead><tr><th>Kanal</th><th class="r">Karo (12 Ay)</th><th class="r">Karo (Ay)</th><th class="r">Karo Payı</th><th class="r">Site Toplam (12 Ay)</th><th class="r">Site Toplam (Ay)</th><th class="r">Karo / Toplam</th></tr></thead>
+<thead><tr><th>Kanal</th><th class="r">Karo (12 Ay)</th><th class="r">Karo (Ay)</th><th class="r">Karo Pay&#305;</th><th class="r">Site Toplam (12 Ay)</th><th class="r">Site Toplam (Ay)</th><th class="r">Karo / Toplam</th></tr></thead>
 <tbody>
 <tr><td>Organic Search</td><td class="m r">8.851</td><td class="m r">738</td><td class="m r">%49,7</td><td class="m r">104.611</td><td class="m r">8.718</td><td class="m r">%8,5</td></tr>
 <tr><td>Direct</td><td class="m r">8.048</td><td class="m r">671</td><td class="m r">%45,2</td><td class="m r">60.722</td><td class="m r">5.060</td><td class="m r">%13,3</td></tr>
 <tr><td>Paid Search</td><td class="m r">704</td><td class="m r">59</td><td class="m r">%3,9</td><td class="m r">55.046</td><td class="m r">4.587</td><td class="m r">%1,3</td></tr>
 <tr><td>Referral</td><td class="m r">125</td><td class="m r">10</td><td class="m r">%0,7</td><td class="m r">5.197</td><td class="m r">433</td><td class="m r">%2,4</td></tr>
-<tr><td>Diğer</td><td class="m r">93</td><td class="m r">8</td><td class="m r">%0,5</td><td class="m r">24.391</td><td class="m r">2.033</td><td class="m r">%0,4</td></tr>
+<tr><td>Di&#287;er</td><td class="m r">93</td><td class="m r">8</td><td class="m r">%0,5</td><td class="m r">24.391</td><td class="m r">2.033</td><td class="m r">%0,4</td></tr>
 <tr class="tot"><td>Toplam</td><td class="m r">17.821</td><td class="m r">1.485</td><td class="m r">%100</td><td class="m r">249.967</td><td class="m r">20.831</td><td class="m r">%7,1</td></tr>
 </tbody></table></div></div>
 </div>
 
+<!-- DE -->
 <div class="site-section">
-<div class="section-bar"><h2>vitra-bad.de - Almanya</h2><div class="site-meta">Toplam site trafiği (son 12 ay): 42.945 oturum - 34.931 kullanıcı</div></div>
+<div class="section-bar"><h2>vitra-bad.de - Almanya</h2><div class="site-meta">Toplam site trafi&#287;i (son 12 ay): 42.945 oturum - 34.931 kullan&#305;c&#305;</div></div>
 <div class="chart-grid">
-<div class="chart-box"><h3>Karo vs Diğer Trafik</h3><div class="chart-wrap" style="height:clamp(210px,32vw,270px)"><canvas id="dePie"></canvas></div></div>
-<div class="chart-box"><h3>Karo Trafiği - Kanal Dağılımı</h3><div class="chart-wrap" style="height:clamp(210px,32vw,270px)"><canvas id="deCh"></canvas></div></div>
+<div class="chart-box"><h3>Karo vs Di&#287;er Trafik</h3><div class="chart-wrap" style="height:clamp(210px,32vw,270px)"><canvas id="dePie"></canvas></div></div>
+<div class="chart-box"><h3>Karo Trafi&#287;i - Kanal Da&#287;&#305;l&#305;m&#305;</h3><div class="chart-wrap" style="height:clamp(210px,32vw,270px)"><canvas id="deCh"></canvas></div></div>
 </div>
-<div class="tbl-title">URL Bazlı Karo Trafiği (Son 12 Ay - Oturum)</div>
+<div class="tbl-title">URL Bazl&#305; Karo Trafi&#287;i (Son 12 Ay - Oturum)</div>
 <div class="tbl-card"><div class="tbl-scroll"><table>
-<thead><tr><th>URL</th><th class="r">Son 12 Ay</th><th class="r">Aylık Ort.</th><th class="r">Kullanıcı (12 Ay)</th><th class="r">Kullanıcı (Ay)</th><th>Kategori</th></tr></thead>
+<thead><tr><th>URL</th><th class="r">Son 12 Ay</th><th class="r">Ayl&#305;k Ort.</th><th class="r">Kullan&#305;c&#305; (12 Ay)</th><th class="r">Kullan&#305;c&#305; (Ay)</th><th>Kategori</th></tr></thead>
 <tbody>
-<tr><td class="u">/fliesen</td><td class="m r">701</td><td class="m r">58</td><td class="m r">597</td><td class="m r">50</td><td>Ana Fliesen Sayfası</td></tr>
+<tr><td class="u">/fliesen</td><td class="m r">701</td><td class="m r">58</td><td class="m r">597</td><td class="m r">50</td><td>Ana Fliesen Sayfas&#305;</td></tr>
 <tr><td class="u">/fliesen/porzellanfliesen</td><td class="m r">271</td><td class="m r">23</td><td class="m r">243</td><td class="m r">20</td><td>Porselen Karolar</td></tr>
 <tr><td class="u">/fliesenkollektionen</td><td class="m r">211</td><td class="m r">18</td><td class="m r">197</td><td class="m r">16</td><td>Koleksiyonlar</td></tr>
-<tr><td class="u">/fliesen/bodenfliesen</td><td class="m r">206</td><td class="m r">17</td><td class="m r">191</td><td class="m r">16</td><td>Yer Karoları</td></tr>
-<tr><td class="u">/fliesen/wandfliesen</td><td class="m r">89</td><td class="m r">7</td><td class="m r">74</td><td class="m r">6</td><td>Duvar Karoları</td></tr>
-<tr style="color:var(--g4)"><td class="u">Diğer /fliesen/ ürün detay sayfaları</td><td class="m r">2.146</td><td class="m r">179</td><td class="m r">1.890</td><td class="m r">158</td><td>Ürün Detay</td></tr>
+<tr><td class="u">/fliesen/bodenfliesen</td><td class="m r">206</td><td class="m r">17</td><td class="m r">191</td><td class="m r">16</td><td>Yer Karolar&#305;</td></tr>
+<tr><td class="u">/fliesen/wandfliesen</td><td class="m r">89</td><td class="m r">7</td><td class="m r">74</td><td class="m r">6</td><td>Duvar Karolar&#305;</td></tr>
+<tr style="color:var(--g4)"><td class="u">Di&#287;er /fliesen/ &#252;r&#252;n detay sayfalar&#305;</td><td class="m r">2.146</td><td class="m r">179</td><td class="m r">1.890</td><td class="m r">158</td><td>&#220;r&#252;n Detay</td></tr>
 <tr class="tot"><td>Toplam Karo</td><td class="m r">3.624</td><td class="m r">302</td><td class="m r">3.192</td><td class="m r">266</td><td></td></tr>
 </tbody></table></div></div>
-
-<div class="tbl-title">Kanal Bazlı Karo Trafiği (Son 12 Ay - Oturum)</div>
+<div class="tbl-title">Kanal Bazl&#305; Karo Trafi&#287;i (Son 12 Ay - Oturum)</div>
 <div class="tbl-card"><div class="tbl-scroll"><table>
-<thead><tr><th>Kanal</th><th class="r">Karo (12 Ay)</th><th class="r">Karo (Ay)</th><th class="r">Karo Payı</th><th class="r">Site Toplam (12 Ay)</th><th class="r">Site Toplam (Ay)</th><th class="r">Karo / Toplam</th></tr></thead>
+<thead><tr><th>Kanal</th><th class="r">Karo (12 Ay)</th><th class="r">Karo (Ay)</th><th class="r">Karo Pay&#305;</th><th class="r">Site Toplam (12 Ay)</th><th class="r">Site Toplam (Ay)</th><th class="r">Karo / Toplam</th></tr></thead>
 <tbody>
 <tr><td>Organic Search</td><td class="m r">3.231</td><td class="m r">269</td><td class="m r">%89,2</td><td class="m r">31.919</td><td class="m r">2.660</td><td class="m r">%10,1</td></tr>
 <tr><td>Direct</td><td class="m r">334</td><td class="m r">28</td><td class="m r">%9,2</td><td class="m r">7.882</td><td class="m r">657</td><td class="m r">%4,2</td></tr>
@@ -141,17 +154,59 @@ footer{background:var(--w);border-top:1px solid var(--g2);padding:clamp(18px,3vw
 <tr class="tot"><td>Toplam</td><td class="m r">3.624</td><td class="m r">302</td><td class="m r">%100</td><td class="m r">42.945</td><td class="m r">3.579</td><td class="m r">%8,4</td></tr>
 </tbody></table></div></div>
 </div>
+
+<!-- GLOBAL -->
+<div class="site-section">
+<div class="section-bar"><h2>vitraglobal.com - Global</h2><div class="site-meta">Toplam site trafi&#287;i (son 12 ay): 288.872 oturum - 245.184 kullan&#305;c&#305;</div></div>
+<div class="chart-grid">
+<div class="chart-box"><h3>Karo vs Di&#287;er Trafik</h3><div class="chart-wrap" style="height:clamp(210px,32vw,270px)"><canvas id="glPie"></canvas></div></div>
+<div class="chart-box"><h3>Karo Trafi&#287;i - Kanal Da&#287;&#305;l&#305;m&#305;</h3><div class="chart-wrap" style="height:clamp(210px,32vw,270px)"><canvas id="glCh"></canvas></div></div>
 </div>
-<footer><div class="container">Inbound SEO - Veri Kaynağı: Google Analytics 4 - Mart 2026</div></footer>
+<div class="tbl-title">URL Bazl&#305; Karo Trafi&#287;i (Son 12 Ay - Oturum)</div>
+<div class="tbl-card"><div class="tbl-scroll"><table>
+<thead><tr><th>URL</th><th class="r">Son 12 Ay</th><th class="r">Ayl&#305;k Ort.</th><th class="r">Kullan&#305;c&#305; (12 Ay)</th><th class="r">Kullan&#305;c&#305; (Ay)</th><th>Kategori</th></tr></thead>
+<tbody>
+<tr><td class="u">/tiles</td><td class="m r">25.526</td><td class="m r">2.127</td><td class="m r">26.200</td><td class="m r">2.183</td><td>Ana Karo Sayfas&#305;</td></tr>
+<tr><td class="u">/tiles/floor-tiles</td><td class="m r">507</td><td class="m r">42</td><td class="m r">421</td><td class="m r">35</td><td>Yer Karolar&#305;</td></tr>
+<tr><td class="u">/tiles/wall-tiles</td><td class="m r">421</td><td class="m r">35</td><td class="m r">357</td><td class="m r">30</td><td>Duvar Karolar&#305;</td></tr>
+<tr><td class="u">/tiles/porcelain-tiles</td><td class="m r">325</td><td class="m r">27</td><td class="m r">302</td><td class="m r">25</td><td>Porselen Karolar</td></tr>
+<tr><td class="u">/retromix</td><td class="m r">287</td><td class="m r">24</td><td class="m r">238</td><td class="m r">20</td><td>Koleksiyon</td></tr>
+<tr><td class="u">/tiles/bathroom</td><td class="m r">286</td><td class="m r">24</td><td class="m r">276</td><td class="m r">23</td><td>Banyo Karolar&#305;</td></tr>
+<tr><td class="u">/tiles/balcony-terrace-garden</td><td class="m r">174</td><td class="m r">15</td><td class="m r">174</td><td class="m r">15</td><td>Balkon / Teras</td></tr>
+<tr><td class="u">/miniworx</td><td class="m r">149</td><td class="m r">12</td><td class="m r">137</td><td class="m r">11</td><td>Koleksiyon</td></tr>
+<tr><td class="u">/tiles/commercial-industrial-areas</td><td class="m r">147</td><td class="m r">12</td><td class="m r">146</td><td class="m r">12</td><td>Ticari / End&#252;striyel</td></tr>
+<tr><td class="u">/tiles/residential-flooring</td><td class="m r">128</td><td class="m r">11</td><td class="m r">127</td><td class="m r">11</td><td>Konut Zemin</td></tr>
+<tr><td class="u">/tiles/pool</td><td class="m r">115</td><td class="m r">10</td><td class="m r">110</td><td class="m r">9</td><td>Havuz</td></tr>
+<tr style="color:var(--g4)"><td class="u">Di&#287;er /tiles/ &#252;r&#252;n detay sayfalar&#305;</td><td class="m r">14.298</td><td class="m r">1.192</td><td class="m r">12.185</td><td class="m r">1.015</td><td>&#220;r&#252;n Detay</td></tr>
+<tr class="tot"><td>Toplam Karo</td><td class="m r">42.363</td><td class="m r">3.530</td><td class="m r">40.673</td><td class="m r">3.389</td><td></td></tr>
+</tbody></table></div></div>
+<div class="tbl-title">Kanal Bazl&#305; Karo Trafi&#287;i (Son 12 Ay - Oturum)</div>
+<div class="tbl-card"><div class="tbl-scroll"><table>
+<thead><tr><th>Kanal</th><th class="r">Karo (12 Ay)</th><th class="r">Karo (Ay)</th><th class="r">Karo Pay&#305;</th><th class="r">Site Toplam (12 Ay)</th><th class="r">Site Toplam (Ay)</th><th class="r">Karo / Toplam</th></tr></thead>
+<tbody>
+<tr><td>Direct</td><td class="m r">29.226</td><td class="m r">2.436</td><td class="m r">%69,0</td><td class="m r">130.610</td><td class="m r">10.884</td><td class="m r">%22,4</td></tr>
+<tr><td>Organic Search</td><td class="m r">12.604</td><td class="m r">1.050</td><td class="m r">%29,8</td><td class="m r">130.644</td><td class="m r">10.887</td><td class="m r">%9,6</td></tr>
+<tr><td>Referral</td><td class="m r">341</td><td class="m r">28</td><td class="m r">%0,8</td><td class="m r">7.704</td><td class="m r">642</td><td class="m r">%4,4</td></tr>
+<tr><td>Di&#287;er</td><td class="m r">192</td><td class="m r">16</td><td class="m r">%0,4</td><td class="m r">19.914</td><td class="m r">1.660</td><td class="m r">%1,0</td></tr>
+<tr class="tot"><td>Toplam</td><td class="m r">42.363</td><td class="m r">3.530</td><td class="m r">%100</td><td class="m r">288.872</td><td class="m r">24.073</td><td class="m r">%14,7</td></tr>
+</tbody></table></div></div>
+</div>
+
+</div>
+
+<footer><div class="container">Inbound SEO - Veri Kayna&#287;&#305;: Google Analytics 4 - Mart 2026</div></footer>
+
 <script>
 const V={o:'#E8490F',dk:'#1A1A1A',g6:'#6B6B6B',g4:'#9E9E9E',g2:'#E5E5E5',amber:'#C47A0A'};
 const base={responsive:true,maintainAspectRatio:false};
 const leg={position:'bottom',labels:{font:{family:'Calibri,Arial',size:12},padding:12,usePointStyle:true,pointStyle:'rectRounded',boxWidth:10}};
-const tt={callbacks:{label:c=>{const t=c.dataset.data.reduce((a,b)=>a+b,0);return` ${c.label}: ${c.parsed.toLocaleString('tr-TR')} (%${Math.round(c.parsed/t*100)})`}}};
+const tt={callbacks:{label:c=>{const t=c.dataset.data.reduce((a,b)=>a+b,0);return' '+c.label+': '+c.parsed.toLocaleString('tr-TR')+' (%'+Math.round(c.parsed/t*100)+')'}}};
 new Chart(document.getElementById('ukPie'),{type:'doughnut',data:{labels:['Di\u011fer (232K)','Karo (18K)'],datasets:[{data:[232146,17821],backgroundColor:[V.g2,V.o],borderWidth:2,borderColor:'#fff'}]},options:{...base,cutout:'60%',plugins:{legend:leg,tooltip:tt}}});
 new Chart(document.getElementById('ukCh'),{type:'doughnut',data:{labels:['Organic (%50)','Direct (%45)','Paid (%4)','Di\u011fer (%1)'],datasets:[{data:[8851,8048,704,218],backgroundColor:[V.dk,V.g6,V.amber,V.g4],borderWidth:2,borderColor:'#fff'}]},options:{...base,cutout:'60%',plugins:{legend:leg,tooltip:tt}}});
 new Chart(document.getElementById('dePie'),{type:'doughnut',data:{labels:['Di\u011fer (39K)','Karo (4K)'],datasets:[{data:[39321,3624],backgroundColor:[V.g2,V.o],borderWidth:2,borderColor:'#fff'}]},options:{...base,cutout:'60%',plugins:{legend:leg,tooltip:tt}}});
 new Chart(document.getElementById('deCh'),{type:'doughnut',data:{labels:['Organic (%89)','Direct (%9)','Di\u011fer (%2)'],datasets:[{data:[3231,334,59],backgroundColor:[V.dk,V.g6,V.g4],borderWidth:2,borderColor:'#fff'}]},options:{...base,cutout:'60%',plugins:{legend:leg,tooltip:tt}}});
+new Chart(document.getElementById('glPie'),{type:'doughnut',data:{labels:['Di\u011fer (247K)','Karo (42K)'],datasets:[{data:[246509,42363],backgroundColor:[V.g2,V.o],borderWidth:2,borderColor:'#fff'}]},options:{...base,cutout:'60%',plugins:{legend:leg,tooltip:tt}}});
+new Chart(document.getElementById('glCh'),{type:'doughnut',data:{labels:['Direct (%69)','Organic (%30)','Di\u011fer (%1)'],datasets:[{data:[29226,12604,533],backgroundColor:[V.g6,V.dk,V.g4],borderWidth:2,borderColor:'#fff'}]},options:{...base,cutout:'60%',plugins:{legend:leg,tooltip:tt}}});
 </script>
 </body>
 </html>
